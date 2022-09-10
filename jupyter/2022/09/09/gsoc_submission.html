@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Gsoc_submission | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Gsoc_submission" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="My current work to date on implementing spatio-temporal models in PyMC" />
+<meta property="og:description" content="My current work to date on implementing spatio-temporal models in PyMC" />
+<link rel="canonical" href="https://conorhassan.github.io/fastpages_blog/jupyter/2022/09/09/gsoc_submission.html" />
+<meta property="og:url" content="https://conorhassan.github.io/fastpages_blog/jupyter/2022/09/09/gsoc_submission.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-09T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Gsoc_submission" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-09-09T00:00:00-05:00","datePublished":"2022-09-09T00:00:00-05:00","description":"My current work to date on implementing spatio-temporal models in PyMC","headline":"Gsoc_submission","mainEntityOfPage":{"@type":"WebPage","@id":"https://conorhassan.github.io/fastpages_blog/jupyter/2022/09/09/gsoc_submission.html"},"url":"https://conorhassan.github.io/fastpages_blog/jupyter/2022/09/09/gsoc_submission.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/fastpages_blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://conorhassan.github.io/fastpages_blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/fastpages_blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastpages_blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fastpages_blog/about/">About Me</a><a class="page-link" href="/fastpages_blog/search/">Search</a><a class="page-link" href="/fastpages_blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Gsoc_submission</h1><p class="page-description">My current work to date on implementing spatio-temporal models in PyMC</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-09-09T00:00:00-05:00" itemprop="datePublished">
+        Sep 9, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      13 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/fastpages_blog/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/conorhassan/fastpages_blog/tree/master/_notebooks/gsoc_submission.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/fastpages_blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/conorhassan/fastpages_blog/master?filepath=_notebooks%2Fgsoc_submission.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastpages_blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/conorhassan/fastpages_blog/blob/master/_notebooks/gsoc_submission.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastpages_blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fconorhassan%2Ffastpages_blog%2Fblob%2Fmaster%2F_notebooks%2Fgsoc_submission.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/fastpages_blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/gsoc_submission.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This post is to mark the end of GSoC 2022, but marks just the beginning of the project. As per the work submission guidelines, here are my contributions. The goal of my project is build submodules for conditional autoregressive models. I have worked on many aspects that will benefit the submodule, but have no pull requests that will be merged into the main branch by the end of the summer.</p>
+<h2 id="1-The-gap---why-we-need-conditional-autoregressive-models-in-PyMC">1 The gap - why we need conditional autoregressive models in PyMC<a class="anchor-link" href="#1-The-gap---why-we-need-conditional-autoregressive-models-in-PyMC"> </a></h2><p>Conditional autoregressive (CAR) models are a class of spatial and spatio-temporal models that are commonly used in areas such as disease mapping and for inference within large datasets. They are amenable to use with large datasetys due to the often low-order "autoregressive" structure used to model the dependence between observations. For example, within a spatial CAR model, the spatial dependence of an area on other areas is often modelled as dependent on only the direct neighbours of that area. This induces a sparsity in the precision matrix between these spatial effects, ensuring more efficient inference than if the precision matrix was dense. Currently, packages such as <a href="https://cran.r-project.org/web/packages/CARBayesST/index.html">CARBayesST</a>, <a href="https://r-nimble.org/">Nimble</a>, and <a href="https://www.r-inla.org/">INLA</a> support a wide variety of CAR models. However, CARBayesST and Nimble use samplers such as random-walk MCMC, which often suffer from either poor convergence or low effective sample size. INLA uses a series of numerical optimization routines to offer a fast approximation to the posterior, yet can be known to occassionally have poor accuracy.</p>
+<h2 id="2-The-models">2 The models<a class="anchor-link" href="#2-The-models"> </a></h2><p>The <strong>CAR prior</strong> models the spatial dependence observed within an areal data set such that the random effect $\phi_i$ for area $i$ has the following conditional prior distribution
+$$
+    \phi_i | \boldsymbol{\phi}_{-i} \sim \mathcal{N} \left( \alpha\frac{\sum_{j \sim i} \phi_j}{n_i}, \frac{\tau^2}{n_i} \right),
+$$
+where $j\sim i$ indicates the all neighbours of $i$, $n_i$ is the total number of neighbours for area $i$, and $\alpha\in(0, 1)$, $\tau^2$ are free. In practice the parameter $\alpha$ is difficult to estimate and the CAR prior is rarely used as part of a more complex statistical model.</p>
+<p>The <strong>ICAR prior</strong> is equivalent to the CAR prior as $\alpha \rightarrow 1$. The ICAR models the spatial dependence observed within an areal data set such that the random effect $\phi_i$ for area $i$ has the following conditional prior distribution
+$$
+    \phi_i | \boldsymbol{\phi}_{-i} \sim \mathcal{N} \left( \frac{\sum_{j \sim i} \phi_j}{n_i}, \frac{\tau^2}{n_i} \right).
+$$
+As the ICAR random effect captures variation spatial in nature, models that use the ICAR component often use an additional independent random effect vector $\boldsymbol{\epsilon}$ to capture added variation not explain by the ICAR component. This type of model is called the <strong>BYM model</strong>.</p>
+<p>As there are two random effects for each area within a BYM model, the individual random effects are unidentifiable, and thus only the sum of the two random effects are identifiable. An alternative approach that circumvents this unidentifiability is the <strong>Leroux prior</strong>, denoted as
+$$
+    \phi_i | \boldsymbol{\phi}_{-i} \sim \mathcal{N} \left( \frac{\rho \sum_{j \sim i} \phi_j}{1 - \rho + \rho n_i}, \frac{\tau^2}{1 - \rho + \rho n_i} \right)\\
+    \rho \sim \text{Uniform}(0,1), 
+$$
+where $\rho$ is a scaling parameter such that when $\rho=0$, the random effects are independent, and when $\rho=1$, the Leroux prior is equivalent to the ICAR component.</p>
+<p>Alternative approaches that look to circumvent the unidentifiability of the BYM modelling approach include a reparameterization called the BYM2 model.</p>
+<h2 id="3-Current-state-of-play-in-PyMC">3 Current state of play in PyMC<a class="anchor-link" href="#3-Current-state-of-play-in-PyMC"> </a></h2><p>Currently, PyMC has a <code>CAR</code> distribution, and an open pull request for an <code>ICAR</code> distribution here. As it currently stands within the pull request for the <code>ICAR</code> distribution, the test coverage of the <code>logp</code> function is poor, and hence why the pull request has not been merged. The reason for the poor testing covergage is that the implementation of the <code>ICAR</code> distribution is based off of a singular Gaussian distribution, making it difficult to write tests for the <code>logp</code> with a different construction to the implementation of the distribution itself. Currently there exists no tutorial using the <code>pm.CAR</code> distribution as it currently stands within PyMC. Please see ongoing progress in <a href="https://github.com/pymc-devs/pymc-examples/pull/417">this pull request</a>.</p>
+<h2 id="4-The-ICAR-prior">4 The ICAR prior<a class="anchor-link" href="#4-The-ICAR-prior"> </a></h2><h3 id="4.1-Writing-the-ICAR-prior-as-a-pairwise-difference">4.1 Writing the ICAR prior as a pairwise difference<a class="anchor-link" href="#4.1-Writing-the-ICAR-prior-as-a-pairwise-difference"> </a></h3><p>Often the log probabiliy of the ICAR distribution is expressed as a pairwise summation. For example, see this implementation [cite the Stan case studies] of the BYM model in Stan.  Let the notation $i\sim j$ denote areas $i$ and $j$ as neighbours. When a summation is over the index $i\sim j$, it means that the summation is over all unique neighbour pairs in the data set. The adjacency matrix $\mathbf{W}\in R^{N\times N}$ has entries $w_{ij} = 1 $ if $i\sim j$, else $w_{ij}=0$. The elements $w_{ii}=0$. The matrix $\mathbf{D} \in R^{N\times N}$ is a diagonal matrix such that each diagonal element corresponds to the number of neighbours $n_i$ for area $i$. By definition, the matrix $\mathbf{D} - \mathbf{W}$ is diagonally dominant, thus positive semi-definite, with non-negative eigenvalues. Unfortunately, the matrix is singular because it is not strictly diagonally dominant. The matrix $\mathbf{I}$ is the identity. The log probability of the Leroux prior can be written as proportional to the following pairwise difference:
+$$
+    \log p(\boldsymbol{\phi}) = -\frac{1}{2}\boldsymbol{\phi}^T\big [\mathbf{D}-\mathbf{W}]\boldsymbol{\phi} + c\\
+    \propto -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N \phi_i\big [\mathbf{D}-\mathbf{W}\big ]_{ij}\phi_j\\
+    = -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N \phi_i[\mathbf{D}-\mathbf{W} \big ]_{ij} \phi_j\\
+    = -\frac{1}{2}\bigg [\sum_{i=1}^N\sum_{j=1}^N \phi_i\phi_{ij}\bigg [ -\sum_{i=1}^N\sum_{j=1}^N \phi_i \phi_j w_{ij}\bigg ]\\
+    = -\frac{1}{2}\bigg [\sum_{i=1}^N \phi_i^2 d_{i} -2\sum_{i\sim j} \phi_i \phi_j\bigg ]\\
+    = -\frac{1}{2}\bigg [\sum_{i\sim j} \phi_i^2 + \phi_j^2 -2 \phi_i \phi_j\bigg ]\\
+$$
+The log-prior specified above assumes a mean of $0$ and a variance scaling of $1$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4.2-Implementation-of-this-logp-term-in-PyMC">4.2 Implementation of this <code>logp</code> term in PyMC<a class="anchor-link" href="#4.2-Implementation-of-this-logp-term-in-PyMC"> </a></h3><p>The pairwise difference can be written as a function (suppose it is called <code>icar_pairwise_diff</code>). The key to implementing the log probability of an ICAR prior within PyMC is to initialize the vector of random effects $\boldsymbol{\phi}$ with <code>pm.Flat</code>, which adds $0$ to the log probability of the graph, and then to evaluate the function <code>icar_pairwise_diff</code> using <code>pm.Potential</code> to add the required log probability value to the overall log probability of the graph.</p>
+
+<pre><code># node 1 and 2 denote pairwise relations 
+coords = {"num_areas": np.arange(N)}
+phi = pm.Flat("phi", dims="num_areas")
+pm.Potential("pairwise_sum", icar_pairwise_diff(phi, node1, node2))</code></pre>
+<h3 id="4.3-Example-notebook-using-the-ICAR-prior-within-a-BYM-model-fit">4.3 Example notebook using the ICAR prior within a BYM model fit<a class="anchor-link" href="#4.3-Example-notebook-using-the-ICAR-prior-within-a-BYM-model-fit"> </a></h3><p>Provided <a href="https://github.com/conorhassan/GSOC2022/blob/main/bym_model.ipynb">here</a> is an implementation of the BYM model within PyMC using the pairwise difference formulation and a sum to zero constraint.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5-Leroux-prior">5 Leroux prior<a class="anchor-link" href="#5-Leroux-prior"> </a></h2><h3 id="5.1-Writing-the-Leroux-prior-as-a-pairwise-difference">5.1 Writing the Leroux prior as a pairwise difference<a class="anchor-link" href="#5.1-Writing-the-Leroux-prior-as-a-pairwise-difference"> </a></h3><p>Seeing the ICAR prior expressed as a pairwise summation, this motivates us to find an expression for the Leroux prior as a pairwise summation, and thus we can use similar functionality above to add the Leroux prior in a PyMC. This is what we now do. Although the following algebraic manipulations are trivial, to the best of my knowledge, I never seen the Leroux prior expressed as a pairwise summation before. Let the notation $i\sim j$ denote areas $i$ and $j$ as neighbours. When a summation is over the index $i\sim j$, it means that the summation is over all unique neighbour pairs in the data set. The adjacency matrix $\mathbf{W}\in R^{N\times N}$ has entries $w_{ij} = 1 $ if $i\sim j$, else $w_{ij}=0$. The elements $w_{ii}=0$. The matrix $\mathbf{D} \in R^{N\times N}$ is a diagonal matrix such that each diagonal element corresponds to the number of neighbours $n_i$ for area $i$. By definition, the matrix $\mathbf{D} - \mathbf{W}$ is diagonally dominant, thus positive semi-definite, with non-negative eigenvalues. Unfortunately, the matrix is singular because it is not strictly diagonally dominant. The matrix $\mathbf{I}$ is the identity. The log probability of the Leroux prior can be written as proportional to the following pairwise difference:
+$$
+    \log p(\boldsymbol{\phi}) = -\frac{1}{2}\boldsymbol{\phi}^T\big [\rho(\mathbf{D}-\mathbf{W}) + (1-\rho)\mathbf{I})\big ]\boldsymbol{\phi} + c\\
+    \propto -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N \phi_i\big [\rho(\mathbf{D}-\mathbf{W}) + (1-\rho)\mathbf{I})\big ]_{ij}\phi_j\\
+    = -\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N \phi_i[\rho(\mathbf{D}-\mathbf{W}) \big ]_{ij} \phi_j-\frac{1}{2}\sum_{i=1}^N\sum_{j=1}^N \phi_i \big [(1-\rho)\mathbf{I})\big ]_{ij}\phi_j\\
+    = -\frac{1}{2}\rho\bigg [\sum_{i=1}^N\sum_{j=1}^N \phi_i\phi_{ij}\bigg [ -\sum_{i=1}^N\sum_{j=1}^N \phi_i \phi_j w_{ij}\bigg ] - \frac{1}{2}(1-\rho)\sum_{i=1}^N\phi_{i}^2\\
+    = -\frac{1}{2}\rho\bigg [\sum_{i=1}^N \phi_i^2 d_{i} -2\sum_{i\sim j} \phi_i \phi_j\bigg ] - \frac{1}{2}(1-\rho)\sum_{i=1}^N\phi_{i}^2\\
+    = -\frac{1}{2}\rho\bigg [\sum_{i\sim j} \phi_i^2 + \phi_j^2 -2 \phi_i \phi_j\bigg ] - \frac{1}{2}(1-\rho)\sum_{i=1}^N\phi_{i}^2\\
+    = -\frac{1}{2}\rho \sum_{i\sim j} (\phi_i - \phi_j)^2 - \frac{1}{2}(1-\rho)\sum_{i=1}^N\phi_{i}^2.
+$$
+The log-prior specified above assumes a mean of $0$ and a variance scaling of $1$.</p>
+<h3 id="5.2-Implementation-of-this-logp-term-into-PyMC">5.2 Implementation of this <code>logp</code> term into PyMC<a class="anchor-link" href="#5.2-Implementation-of-this-logp-term-into-PyMC"> </a></h3><p>The implementation is similar to the ICAR prior above except we evaluate a <code>pm.Potential</code> expression under a function that represents the pairwise summation given above for the pairwise Leroux prior.</p>
+<h3 id="5.3-Example-notebook-of-a-Leroux-model-fit">5.3 Example notebook of a Leroux model fit<a class="anchor-link" href="#5.3-Example-notebook-of-a-Leroux-model-fit"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Provided <a href="https://github.com/conorhassan/GSOC2022/blob/main/leroux_model.ipynb">here</a> is an implementation of a model using the Leroux prior within PyMC using the pairwise difference formulation and a sum to zero constraint.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6-Extensions-to-spatio-temporal-models">6 Extensions to spatio-temporal models<a class="anchor-link" href="#6-Extensions-to-spatio-temporal-models"> </a></h2><h3 id="6.1-The-linear-time-CAR-model">6.1 The linear time CAR model<a class="anchor-link" href="#6.1-The-linear-time-CAR-model"> </a></h3><p>We can now use the building block of the Leroux prior to fit models with more complex random effect structures towards spatio-temporal datasets within PyMC. A simple example od this is the <strong>linear time spatio-temporal conditional autoregressive model</strong>.</p>
+<p>For this this model, data from area $i$ at time $t$ is modelled as 
+$$
+y_{i, t} \sim \text{Poisson}(\mu_{i, t})\\
+\log \mu_{i, t} = \beta_0 + \beta_1 x_{i, t} + \log E_{i, t} +\psi_{i, t},
+$$
+where $\psi_{i, t}$ is the random effect, modelled as 
+$$
+\psi_{i, t}=\mu+\phi_{i}+(\alpha+\delta_i)\frac{t-\bar{t}}{T}, 
+$$
+where both the $\boldsymbol{\phi}$'s and $\boldsymbol{\delta}$'s have a Leroux prior. Effectively, this is a hierarchical model with random intercepts and random slopes, except that these two terms are "smoothed" over by the random intercepts and slopes respectively of their directly local neighbours.</p>
+<h3 id="6.2-Example-notebook-of-the-linear-time-CAR-model">6.2 Example notebook of the linear-time CAR model<a class="anchor-link" href="#6.2-Example-notebook-of-the-linear-time-CAR-model"> </a></h3><p>Provided <a href="https://github.com/conorhassan/GSOC2022/blob/main/leroux_model.ipynb">here</a> is an implementation of the linear time spatio-temporal conditional autoregressive model PyMC using Leroux priors expressed with the pairwise difference formulation and a sum to zero constraint.</p>
+<h2 id="7-Future-work">7 Future work<a class="anchor-link" href="#7-Future-work"> </a></h2><h3 id="7.1-How-I-want-the-models-discussed-to-be-able-to-be-used-within-PyMC">7.1 How I want the models discussed to be able to be used within PyMC<a class="anchor-link" href="#7.1-How-I-want-the-models-discussed-to-be-able-to-be-used-within-PyMC"> </a></h3><p>The current notebooks provided manually define random effects using $pm.Flat$, evaluate the pairwise difference formulation using calls to <code>pm.Potential</code>, manually apply a distributional constrant on the sum of the random effects, and define priors for the free parameters within the ICAR and the Leroux specifications. My next step is to create functionality such as <code>pm.BYM</code>, <code>pm.Leroux</code>, <code>pm.BYM2</code> that completess all of the above mentioned steps, such that fitting these models becomes as simple as defining your random effect structure with a single call to something such as <code>pm.Leroux</code>.</p>
+<h4 id="Issues-to-consider-with-the-proposed-approach-in-7.1">Issues to consider with the proposed approach in 7.1<a class="anchor-link" href="#Issues-to-consider-with-the-proposed-approach-in-7.1"> </a></h4><ul>
+<li>prior specification within the call to <code>pm.Leroux</code> (e.g., priors being defined for $\rho$, $\tau^2$ by implicitly calling <code>pm.Leroux</code>). If the user wants to define their own priors for $\rho$ and $\tau$, making sure the arguments are available that the pre-defined parameters can be linked with the call to <code>pm.Leroux</code>.</li>
+<li>CAR models are hierarchical in nature, and so there is optionality to choose centered versus non centered parameterizations, and exploration is required into how these different parameterizations affect the performance of fitting such spatio-temporal models using the available inference algorithms.</li>
+<li>sum-to-zero constraints are required on the random effects to ensure parameter identifiability with any intercept parameters. Need to determine the best way to satisfy this constraint for parameters defined by <code>pm.Flat</code>.</li>
+</ul>
+<h3 id="7.2-Addition-of-more-spatiotemporal-CAR-models">7.2 Addition of more spatiotemporal CAR models<a class="anchor-link" href="#7.2-Addition-of-more-spatiotemporal-CAR-models"> </a></h3><p>Now that we can use Leroux priors within PyMC, the building blocks exist for extensions into according more complex, especially within the spatio-temporal model class. Here is an example.</p>
+<h4 id="The-AR-2-spatio-temporal-CAR-model">The AR-2 spatio-temporal CAR model<a class="anchor-link" href="#The-AR-2-spatio-temporal-CAR-model"> </a></h4><p>Suppose we now observe $\mathbf{y}\in\mathbb{R}^{N\times T}$, $\mathbf{x}\in\mathbb{R}^{N\times T}$, $\mathbf{x}_{\text{pop}}\in\mathbb{R}^{N\times T}$, e.g., we have a sequence in time, of observations of the response, covariate, and offset for each area. We model the mean vector of the random effects at each time point as following an autoregressive process of order $2$. Ignoring the model terms that are not relevant to the Leroux prior, we get the following:
+$$
+    \psi_{t, i} = \phi_{t, i}\\
+    \boldsymbol{\phi}_t|\boldsymbol{\phi}_{t-1}, \boldsymbol{\phi}_{t-2} \sim \text{Normal}\bigg (\rho_{T_1}\boldsymbol{\phi}_{t-1}+\rho_{T_2}\boldsymbol{\phi}_{t-2}, \tau^2 \bigg (\rho_{s}[\mathbf{D}-\mathbf{W}]+(1-\rho_s)\mathbf{I}\bigg )\bigg )\\
+    \boldsymbol{\phi}_1, \boldsymbol{\phi}_2 \sim \text{Normal}\bigg (\mathbf{0}, \tau^2\bigg (\rho_{s}[\mathbf{D}-\mathbf{W}]+(1-\rho_s)\mathbf{I}\bigg )\bigg )\\
+    \tau^2 \sim \text{Inverse-Gamma}(1, b)\\
+    \rho_S \sim \text{Uniform}(0, 1)\\
+    f(\rho_{T_1}, \rho_{T_2})\propto 1.
+$$</p>
+<h4 id="The-AR-2-spatio-temporal-CAR-model-as-a-pairwise-summation">The AR-2 spatio-temporal CAR model as a pairwise summation<a class="anchor-link" href="#The-AR-2-spatio-temporal-CAR-model-as-a-pairwise-summation"> </a></h4><p>We can see that the vector of random effects for $t=1, 2$ have the same log-probability structure as the Leroux prior defined with no temporal component, and thus are proportional to 
+$$
+    \log p(\boldsymbol{\phi}_{1}, \boldsymbol{\phi}_2)\propto -\frac{\tau}{2}\rho_S[\sum_{t=1}^2\sum_{j\sim i}(\phi_{t,i}-\phi_{t, j})^2] - \frac{\tau}{2}(1-\rho_S)\sum_{t=1}^2\sum_{j\sim i}(\phi_{t,i}^2).
+$$
+We define the mean vector an time point $t$ as equal to $\boldsymbol{\mu_t}=\rho_{T_1}\boldsymbol{\phi}_{t-1}+\rho_{t-2}\boldsymbol{\phi}_{t-2}$. Thus, the log probability over the vectors of random effects from time points $t=3, 3, \ldots, T$, can be written as proportional to
+$$
+    \log p(\boldsymbol{\phi}_3, \boldsymbol{\phi}_4, \ldots, \boldsymbol{\phi}_T) \propto -\frac{\tau}{2}\rho_S \bigg[\sum_{t=3}^T \sum_{j\sim i}\phi_{t, i}-\phi_{t, j} -(\mu_{t, i}-\mu_{t, j})\bigg] -\frac{\tau}{2}(1-\rho_S) \bigg[\sum_{t=3}^T \sum_{i=1}^N(\phi_{t, i} - \mu_{t, i})^2\bigg]. 
+$$</p>
+<h4 id="Added-difficulties-with-such-a-model">Added difficulties with such a model<a class="anchor-link" href="#Added-difficulties-with-such-a-model"> </a></h4><p>The mean $\boldsymbol{\mu}_{t}$ of the random effects at each time $t$ must be computed using values of the random effects at previous time points. To compute such quantities without creating a double <code>for</code> loop within the <code>pm.Model</code> we must make use of functionality such as <code>aesara.scan</code>. Additionally, the sum to zero constraints for such models must hold for the random effects at each of the $T$ time points. This will potentially require looking at alternate ways to satisfy such constraints.</p>
+<h4 id="Additional-models-of-interest">Additional models of interest<a class="anchor-link" href="#Additional-models-of-interest"> </a></h4><p>The CARBayesST package within R has implementations of numerous spatio-temporal CAR models, such as the aforementioned AR-2 spatio-temporal CAR model. We have now developed the ability to derive the log probability of the random effects of the majority of these models as a pairwise summation. Hopefully this will allow us to include such models using a possible <code>model_type</code> argument with the <code>pm.Leroux</code>, <code>pm.BYM</code>, and <code>pm.BYM2</code> functions</p>
+<h3 id="7.4-Profiling-of-PyMC-implementation-compared-to-CARBayes,-Nimble,-and-INLA">7.4 Profiling of PyMC implementation compared to CARBayes, Nimble, and INLA<a class="anchor-link" href="#7.4-Profiling-of-PyMC-implementation-compared-to-CARBayes,-Nimble,-and-INLA"> </a></h3><p>Lastly, once the ideas discussed above are added to the PyMC, it is important that we profile the computational efficiency and the inference accuracy of libraries that currently support the same class of models, such as CARBayesST, Nimble, and INLA.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I am very grateful for the awesome oppurtunity to learn from some awesome people in Bill and Chris. My hope in doing this experience was to improve my programming and software development skills. While the progress that I have made in this regard in the past few months was slower than I would like, I am excited for the potential use cases of the end product of the the work that we have done, once it exists and is available within the core PyMC library. Since first seeing Leroux priors used within spatio-temporal models, it has been a source of confusion as to the lack of availabile software that can sample these models using gradient-based samplers such as NUTS. I am happy with our progress in learning how to evaluate the log probability of such priors such that they can be sampled within modern probabilistic programming packages (like PyMC :)).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="conorhassan/fastpages_blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/fastpages_blog/jupyter/2022/09/09/gsoc_submission.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/fastpages_blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/fastpages_blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/fastpages_blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" target="_blank" title="fastai"><svg class="svg-icon grey"><use xlink:href="/fastpages_blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" target="_blank" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/fastpages_blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
